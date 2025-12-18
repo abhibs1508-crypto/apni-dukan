@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ShoppingCart, User, Menu, X } from "lucide-react";
 
 import logoSmall from "../assets/logo-small.png";
-import logoLong from "../assets/logo-long.png";
+import logoLong from "../assets/logo1.png";
 
 import "./Navbar.css";
 

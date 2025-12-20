@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import "./ProductDetail.css";
 
-// Import product images
 import phone from "../assets/phone.jpeg";
 import laptop from "../assets/laptop.jpeg";
 import watch from "../assets/watch.jpeg";

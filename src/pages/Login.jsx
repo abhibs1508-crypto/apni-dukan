@@ -1,35 +1,22 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext.jsx";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./Login.css";
 
 export default function Login() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(email, password);
-    navigate("/");
-  };
-
   return (
     <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button>Login</button>
-        <p>
-          No account? <Link to="/register">Register</Link>
-        </p>
-      </form>
+      <div className="auth-card">
+        <h1>Welcome Back</h1>
+        <p>Login to continue shopping</p>
+
+        <input type="email" placeholder="Email Address" />
+        <input type="password" placeholder="Password" />
+
+        <button className="auth-btn">Login</button>
+
+        <span className="auth-link">
+          New user? <Link to="/register">Create account</Link>
+        </span>
+      </div>
     </div>
   );
 }

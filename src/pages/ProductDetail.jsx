@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import "./ProductDetail.css";
 
@@ -7,40 +7,54 @@ import laptop from "../assets/laptop.jpeg";
 import watch from "../assets/watch.jpeg";
 import shoes from "../assets/shoes.jpeg";
 
+const PRODUCTS = {
+  1: {
+    name: "Smart Phone",
+    price: 15999,
+    image: phone,
+    desc: "High performance smartphone with AMOLED display and long battery life."
+  },
+  2: {
+    name: "Laptop Pro",
+    price: 58999,
+    image: laptop,
+    desc: "Powerful laptop for coding, gaming and professional work."
+  },
+  3: {
+    name: "Smart Watch",
+    price: 4999,
+    image: watch,
+    desc: "Track fitness, heart rate and notifications in style."
+  },
+  4: {
+    name: "Running Shoes",
+    price: 2999,
+    image: shoes,
+    desc: "Lightweight and durable shoes for daily workouts."
+  }
+};
+
 export default function ProductDetail() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const products = [
-    { id: "1", title: "Smart Phone", price: 15999, image: phone, description: "High performance AMOLED display, long battery life, fast charging." },
-    { id: "2", title: "Laptop Pro", price: 58999, image: laptop, description: "Powerful laptop for work, gaming, and creativity with SSD storage." },
-    { id: "3", title: "Smart Watch", price: 4999, image: watch, description: "Premium fitness tracking, sleep monitoring, notifications, and long battery." },
-    { id: "4", title: "Running Shoes", price: 2999, image: shoes, description: "Comfortable, lightweight running shoes for everyday workouts." },
-  ];
-
-  const product = products.find((p) => p.id === id);
-  if (!product) return <p>Product not found</p>;
+  const product = PRODUCTS[id];
+  if (!product) return <h2>Product not found</h2>;
 
   return (
     <div className="product-detail">
-      <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
+      <div className="product-image">
+        <img src={product.image} alt={product.name} />
+      </div>
 
-      <div className="product-detail-container">
-        <div className="product-image">
-          <img src={product.image} alt={product.title} />
-        </div>
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p className="price">₹{product.price}</p>
+        <p className="desc">{product.desc}</p>
 
-        <div className="product-info">
-          <h2>{product.title}</h2>
-          <p className="price">₹{product.price}</p>
-          <p className="description">{product.description}</p>
-
-          <div className="product-detail-buttons">
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
-            <button onClick={() => navigate("/cart")}>Go to Cart</button>
-          </div>
-        </div>
+        <button onClick={() => addToCart({ id, ...product })}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

@@ -1,134 +1,81 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext.jsx";
 import "./Home.css";
 
-// HERO IMAGES
+// hero images
 import hero1 from "../assets/hero1.jpeg";
 import hero2 from "../assets/hero2.jpeg";
 import hero3 from "../assets/hero3.jpeg";
 
-// CATEGORY IMAGES
+// category images
 import electronics from "../assets/electronics.jpeg";
 import fashion from "../assets/fashion.jpeg";
 import grocery from "../assets/grocery.jpeg";
 
-// PRODUCT IMAGES
-import phone from "../assets/phone.jpeg";
-import laptop from "../assets/laptop.jpeg";
-import watch from "../assets/watch.jpeg";
-import shoes from "../assets/shoes.jpeg";
+// products
+import p1 from "../assets/product1.jpeg";
+import p2 from "../assets/product2.jpeg";
+import p3 from "../assets/product3.jpeg";
 
 export default function Home() {
-  const heroImages = [hero1, hero2, hero3];
-  const [currentHero, setCurrentHero] = useState(0);
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const heroImages = [hero1, hero2, hero3];
+  const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHero((prev) => (prev + 1) % heroImages.length);
+    const timer = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
     }, 4000);
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="home">
-
+    <div className="home-root">
       {/* HERO */}
       <section
         className="hero"
-        style={{ backgroundImage: `url(${heroImages[currentHero]})` }}
+        style={{ backgroundImage: `url(${heroImages[heroIndex]})` }}
       >
         <div className="hero-overlay">
-          <h1>
-            India’s <span>Smartest</span> Shopping Platform
-          </h1>
-          <p>Electronics • Fashion • Daily Needs</p>
-          <button
-            className="hero-btn"
-            onClick={() => navigate("/products")}
-          >
+          <h1>Apni Dukan</h1>
+          <p>India’s Smartest Online Shopping Experience</p>
+          <button onClick={() => navigate("/products")}>
             Shop Now
           </button>
         </div>
       </section>
 
       {/* CATEGORIES */}
-      <section className="categories">
+      <section className="section">
         <h2 className="section-title">Shop by Category</h2>
-
         <div className="category-grid">
-          <div
-            className="category-card"
-            onClick={() => navigate("/products?category=electronics")}
-          >
+          <div onClick={() => navigate("/products")} className="category-card">
             <img src={electronics} alt="Electronics" />
-            <button>Electronics</button>
+            <span>Electronics</span>
           </div>
-
-          <div
-            className="category-card"
-            onClick={() => navigate("/products?category=fashion")}
-          >
+          <div onClick={() => navigate("/products")} className="category-card">
             <img src={fashion} alt="Fashion" />
-            <button>Fashion</button>
+            <span>Fashion</span>
           </div>
-
-          <div
-            className="category-card"
-            onClick={() => navigate("/products?category=grocery")}
-          >
+          <div onClick={() => navigate("/products")} className="category-card">
             <img src={grocery} alt="Grocery" />
-            <button>Grocery</button>
+            <span>Grocery</span>
           </div>
         </div>
       </section>
 
       {/* FEATURED PRODUCTS */}
-      <section className="products">
+      <section className="section">
         <h2 className="section-title">Featured Products</h2>
-
         <div className="product-grid">
-          <div className="product-card">
-            <img src={phone} alt="Phone" />
-            <h3>Smart Phone</h3>
-            <p>High performance AMOLED display</p>
-            <span>₹15,999</span>
-            <button onClick={() => addToCart({ id: 1, title: "Smart Phone", price: 15999, image: phone })}>
-              Add to Cart
-            </button>
-          </div>
-
-          <div className="product-card">
-            <img src={laptop} alt="Laptop" />
-            <h3>Laptop Pro</h3>
-            <p>Powerful laptop for work</p>
-            <span>₹58,999</span>
-            <button onClick={() => addToCart({ id: 2, title: "Laptop Pro", price: 58999, image: laptop })}>
-              Add to Cart
-            </button>
-          </div>
-
-          <div className="product-card">
-            <img src={watch} alt="Watch" />
-            <h3>Smart Watch</h3>
-            <p>Premium fitness tracking</p>
-            <span>₹4,999</span>
-            <button onClick={() => addToCart({ id: 3, title: "Smart Watch", price: 4999, image: watch })}>
-              Add to Cart
-            </button>
-          </div>
-
-          <div className="product-card">
-            <img src={shoes} alt="Shoes" />
-            <h3>Running Shoes</h3>
-            <p>Comfortable & lightweight</p>
-            <span>₹2,999</span>
-            <button onClick={() => addToCart({ id: 4, title: "Running Shoes", price: 2999, image: shoes })}>
-              Add to Cart
-            </button>
-          </div>
+          {[p1, p2, p3].map((img, i) => (
+            <div className="product-card" key={i}>
+              <img src={img} alt="product" />
+              <h3>Premium Product</h3>
+              <p>High quality product with best price</p>
+              <button>View Details</button>
+            </div>
+          ))}
         </div>
       </section>
     </div>

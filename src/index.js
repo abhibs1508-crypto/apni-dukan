@@ -5,14 +5,14 @@ import App from "./App.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <BrowserRouter>
     <ThemeProvider>
       <CartProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <App />
       </CartProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  </BrowserRouter>
 );

@@ -1,30 +1,35 @@
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import "./Cart.css";
 
 export default function Cart() {
-  const { cartItems, updateQty, removeFromCart, cartTotal } = useCart();
+  const navigate = useNavigate();
+
+  const { cart, removeFromCart } = useCart();
 
   return (
     <div className="cart-page">
-      <h1>Your Cart</h1>
+      <h2>Your Cart</h2>
 
-      {cartItems.map((item) => (
-        <div className="cart-item" key={item.id}>
-          <img src={item.image} alt={item.title} />
+      {cart.length === 0 && <p>Cart is empty</p>}
+
+      {cart.map((item, index) => (
+        <div className="cart-item" key={index}>
+          <img src={item.image} alt={item.name} />
           <div>
-            <h3>{item.title}</h3>
+            <h4>{item.name}</h4>
             <p>₹{item.price}</p>
-            <div className="qty">
-              <button onClick={() => updateQty(item.id, item.quantity - 1)}>-</button>
-              <span>{item.quantity}</span>
-              <button onClick={() => updateQty(item.id, item.quantity + 1)}>+</button>
-            </div>
-            <button onClick={() => removeFromCart(item.id)}>Remove</button>
           </div>
+          <button onClick={() => removeFromCart(item.id)}>Remove</button>
+          <button
+  onClick={() => navigate("/checkout")}
+  className="checkout-btn"
+>
+  Proceed to Checkout
+</button>
+
         </div>
       ))}
-
-      <h2>Total: ₹{cartTotal}</h2>
     </div>
   );
 }

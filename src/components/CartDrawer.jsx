@@ -1,43 +1,28 @@
 import { useCart } from "../context/CartContext.jsx";
-import { Link } from "react-router-dom";
+import "./CartDrawer.css";
 
-export default function CartDrawer() {
-  const {
-    cartItems,
-    updateQty,
-    removeFromCart,
-    cartTotal,
-    openDrawer,
-    setOpenDrawer,
-  } = useCart();
+export default function CartDrawer({ isOpen, closeCart }) {
+  const { cart, removeFromCart } = useCart();
 
   return (
-    <>
-      {openDrawer && <div className="overlay" onClick={() => setOpenDrawer(false)}></div>}
-      <div className={`cart-drawer ${openDrawer ? "open" : ""}`}>
-        <h2>Your Cart</h2>
-
-        {cartItems.length === 0 && <p>Cart is empty</p>}
-
-        {cartItems.map((item) => (
-          <div className="drawer-item" key={item.id}>
-            <img src={item.image} alt={item.title} />
-            <div>
-              <h4>{item.title}</h4>
-              <p>₹{item.price}</p>
-              <div className="qty">
-                <button onClick={() => updateQty(item.id, item.quantity - 1)}>-</button>
-                <span>{item.quantity}</span>
-                <button onClick={() => updateQty(item.id, item.quantity + 1)}>+</button>
-              </div>
-              <button onClick={() => removeFromCart(item.id)}>Remove</button>
-            </div>
-          </div>
-        ))}
-
-        <h3>Total: ₹{cartTotal}</h3>
-        <Link to="/cart" onClick={() => setOpenDrawer(false)}>Go to Cart</Link>
+    <div className={`cart-drawer ${isOpen ? "open" : ""}`}>
+      <div className="cart-header">
+        <h3>Your Cart</h3>
+        <button onClick={closeCart}>✖</button>
       </div>
-    </>
+
+      {cart.length === 0 && <p className="empty">Cart is empty</p>}
+
+      {cart.map((item, index) => (
+        <div className="drawer-item" key={index}>
+          <img src={item.image} alt={item.name} />
+          <div>
+            <h4>{item.name}</h4>
+            <p>₹{item.price}</p>
+          </div>
+          <button onClick={() => removeFromCart(item.id)}>❌</button>
+        </div>
+      ))}
+    </div>
   );
 }

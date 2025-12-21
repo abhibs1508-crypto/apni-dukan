@@ -23,13 +23,15 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  --bg: #020617;
+  --text: #e5e7eb;
 }
 
 .nav-logo {
   font-size: 1.6rem;
   font-weight: bold;
   background: var(--accent);
-  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 

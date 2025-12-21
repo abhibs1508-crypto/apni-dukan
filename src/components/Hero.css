@@ -26,3 +26,16 @@
   background: var(--gradient);
   font-weight: 700;
 }
+:root[data-theme="dark"] {
+  --bg: #ebecf4;
+  --card: #020617;
+  --text: #ffffff;
+  --accent: linear-gradient(90deg, #38bdf8, #22c55e);
+}
+
+:root[data-theme="light"] {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #cfd5ef;
+  --accent: linear-gradient(90deg, #6366f1, #22c55e);
+}

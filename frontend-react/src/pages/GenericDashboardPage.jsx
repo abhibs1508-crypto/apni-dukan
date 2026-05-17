@@ -1,0 +1,1 @@
+export const GenericDashboardPage = ({ title, modules }) => <div><h2 className='text-2xl font-bold'>{title}</h2><div className='mt-4 grid gap-4 md:grid-cols-3'>{modules.map((m)=><div key={m} className='metric-card h-36'>{m}</div>)}</div></div>;

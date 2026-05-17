@@ -1,0 +1,2 @@
+import { currency } from '../utils/formatters';
+export const TurfBookingPage = () => <div className='space-y-4'><h2 className='text-2xl font-bold'>Turf Booking</h2><div className='grid gap-4 md:grid-cols-3'>{[1,2,3].map((x)=><div key={x} className='glass rounded-2xl p-4'><h3>Turf {x}</h3><p>{currency(1200+x*300)} / slot</p><p className='text-emerald-300'>Available</p><button className='mt-3 rounded bg-cyan-400 px-3 py-2 text-slate-950'>Book Slot</button></div>)}</div><div className='metric-card h-56'>Calendar + Time Slot Widget</div></div>;

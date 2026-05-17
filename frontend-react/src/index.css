@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+body { @apply bg-slate-950 text-slate-100 antialiased; }
+.glass { @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/20; }
+.metric-card { @apply glass rounded-2xl p-4 md:p-5; }
